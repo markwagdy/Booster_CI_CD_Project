@@ -4,7 +4,7 @@ pipeline {
 
         stage('build') {
             steps {
-              sh 'docker build -f Dockerfile-t markwagdy/project:v1.0 .'
+              sh 'docker build -f Dockerfile . -t markwagdy/projectdev:v1.0 '
             }
             }
 
@@ -12,14 +12,14 @@ pipeline {
             steps {
               withCredentials([usernamePassword(credentialsId:"docker",usernameVariable:"USERNAME",passwordVariable:"PASSWORD")]){
               sh 'docker login --username $USERNAME --password $PASSWORD'
-              sh 'docker push markwagdy/project:v1.0'
+              sh 'docker push markwagdy/projectdev:v1.0'
               }
             }
         }
 
         stage('deploy') {
           steps {
-            sh 'docker run -d -p 8000:8000 markwagdy/project:v1.0'
+            sh 'docker run -d -p 8000:8000 markwagdy/projectdev:v1.0'
         }
         }
     }
