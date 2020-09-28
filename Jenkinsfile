@@ -19,7 +19,7 @@ pipeline {
 
         stage('deploy') {
           steps {
-            sh 'docker run -d -p 8001:8001 markwagdy/projectdev:v1.0'
+            sh 'docker run -d -p 8001:8000 markwagdy/projectdev:v1.0'
         }
         }
     }
